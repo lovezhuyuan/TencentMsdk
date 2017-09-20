@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tencent.tmgp.xdlcbj.kddsq.wx"
+    android:installLocation="auto">
+
+    <uses-feature android:glEsVersion="0x00020000" />
+    
+    <application
+        android:label="@string/app_name"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+		android:debuggable="true">
+        
+        <!-- Tell Cocos2dxActivity the name of our .so -->
+        <meta-data android:name="android.app.lib_name"
+                   android:value="MyGame" />
+
+        <activity
+            android:name="org.cocos2dx.cpp.AppActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:launchMode="singleTask"	>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+		
+				<!-- 6.0系统权限配置activity, 2.18.0新增-->
+				
+				<!-- 【必须】请修改为 游戏包名.diff -->
+		<activity
+			android:name="com.tencent.msdk.PermissionActivity"
+			android:excludeFromRecents="true"
+			android:exported="true"
+			android:label="PermissionActivity"
+			android:launchMode="singleTop"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:screenOrientation="behind"
+			
+			android:taskAffinity="com.tencent.tmgp.xdlcbj.kddsq.wx.diff" />
+		
+		<activity
+			android:name="com.tencent.msdk.NameAuthActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden"
+			android:screenOrientation="sensor"
+			android:launchMode="singleTop"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+		
+		<!-- TODO SDK接入 QQ接入配置 START -->
+		<activity
+			android:name="com.tencent.tauth.AuthActivity"
+			android:launchMode="singleTask"
+			android:noHistory="true" >
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<!-- 【必须】请修改为 tencent游戏的手Q appid -->
+				<data android:scheme="1105633713" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="com.tencent.connect.common.AssistActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden"
+			android:screenOrientation="portrait"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+		<!-- TODO SDK接入 QQ接入配置 END -->
+		
+		<!-- TODO SDK接入 微信接入配置 START -->
+		<!-- 【必须】此处应改为 游戏包名.wxapi.WXEntryActivity -->
+		<!-- 【必须】此处应改为 游戏包名.diff -->
+		<activity
+		
+			android:name="com.tencent.tmgp.xdlcbj.kddsq.wx.wxapi.WXEntryActivity"
+			android:excludeFromRecents="true"
+			android:exported="true"
+			android:label="WXEntryActivity"
+			android:launchMode="singleTop"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:screenOrientation="portrait"
+			
+			android:taskAffinity="com.tencent.tmgp.xdlcbj.kddsq.wx.diff" >
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<!-- 【必须】此处应改为 游戏的微信 appid -->
+				<data android:scheme="wx139241008fc3a064" />
+			</intent-filter>
+		</activity>
+		<!-- TODO SDK接入 微信接入配置 END -->
+		
+		<!-- TODO SDK接入 微信扫码登录配置 START -->
+		<!-- 必须此处应改为 游戏包名.diff -->
+	<activity
+		android:name="com.tencent.msdk.weixin.qrcode.WXQrCodeActivity"
+		android:excludeFromRecents="true"
+		android:exported="true"
+		android:label="WXQrCodeActivity"
+		android:launchMode="singleTask"
+		
+		android:taskAffinity="com.tencent.tmgp.xdlcbj.kddsq.wx.diff" 
+		android:configChanges="orientation|screenSize|keyboardHidden"
+		android:theme="@android:style/Theme.Light.NoTitleBar"
+		android:screenOrientation="portrait">
+	</activity>
+	<!-- TODO SDK接入  微信扫码登录配置 END -->
+	
+	<!-- TODO Notice 公告 配置 START -->
+	<activity
+		android:name="com.tencent.msdk.notice.AlertMsgActivity"
+		android:configChanges="orientation|screenSize|keyboardHidden"
+		android:screenOrientation="sensor"
+		android:theme="@style/NoticeAlertTheme" >
+	</activity>
+
+	<service android:name="com.tencent.msdk.notice.RollFloatService" >
+	</service>
+	<!-- TODO Notice 公告 配置  END -->
+	
+	<!-- TODO 浏览器相关 START -->
+	<activity
+		android:name="com.tencent.msdk.webview.JumpShareActivity"
+		android:theme="@android:style/Theme.Translucent.NoTitleBar">
+	</activity>
+	
+	<activity
+		android:name="com.tencent.msdk.webview.WebViewActivity"
+		android:process=":msdk_inner_webview" 
+		android:hardwareAccelerated="true"
+		android:configChanges="orientation|screenSize|keyboardHidden|navigation|fontScale|locale"
+		android:screenOrientation="unspecified"
+		android:theme="@android:style/Theme.NoTitleBar"
+		android:windowSoftInputMode="stateHidden|adjustResize" >
+	
+		<meta-data android:name="titlebar_hideable" android:value="true"/>
+		<meta-data android:name="toolbar_portrait_hideable" android:value="true"/>
+		<meta-data android:name="toolbar_landscape_hideable" android:value="true"/>
+	
+	</activity>
+	<!-- TODO 浏览器相关 END -->
+
+	<!-- TODO 应用宝省流量更新相关 START -->
+	<service
+		android:name="com.tencent.tmdownloader.TMAssistantDownloadService"
+		android:exported="false"
+		android:process=":TMAssistantDownloadSDKService" >
+	</service>
+	<!-- TODO 应用宝省流量更新 END -->
+	
+	<!-- 信鸽配置START -->
+	<!-- 【必须】 信鸽通知栏 -->        
+	<activity
+		android:name="com.tencent.android.tpush.XGPushActivity"
+		android:theme="@android:style/Theme.NoDisplay"
+		android:exported="false" >
+		<intent-filter>
+        <!-- 若使用AndroidStudio，请设置android:name="android.intent.action"-->
+        <action android:name="android.intent.action" />
+		</intent-filter>
+	</activity>
+
+		<!-- 【必须】 信鸽receiver广播接收 -->
+		<receiver
+			android:name="com.tencent.android.tpush.XGPushReceiver"
+			android:process=":xg_service_v2" >
+			<intent-filter android:priority="0x7fffffff" >
+				<!-- 【必须】 信鸽SDK的内部广播 -->
+				<action android:name="com.tencent.android.tpush.action.SDK" />
+				<action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
+				<!-- 【必须】 系统广播：开屏和网络切换 -->
+				<action android:name="android.intent.action.USER_PRESENT" />
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+			</intent-filter>
+
+		</receiver>
+
+		<!-- 【必须】 信鸽service -->
+		<service
+			android:name="com.tencent.android.tpush.service.XGPushService"
+			android:exported="true"
+			android:persistent="true"
+			android:process=":xg_service_v2" />
+
+		<!-- 【必须】 通知service，此选项有助于提高抵达率 -->
+		<service
+			android:name="com.tencent.android.tpush.rpc.XGRemoteService"
+			android:exported="true" >
+			<intent-filter>
+			<!-- 【必须】 请修改为当前APP包名.PUSH_ACTION-->
+				<action android:name="com.example.wegame.PUSH_ACTION" />
+			</intent-filter>
+		</service> 
+
+		<!-- msdk httpdns网络监听 2.18.0新增加 -->
+		<receiver
+			android:name="com.tencent.special.httpdns.Cache$ConnectReceiver"
+			android:label="NetworkConnection" >
+			<intent-filter>
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+			</intent-filter>
+		</receiver>
+    </application>
+
+   
+	<!-- TODO SDK接入必须权限模块 START -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 登录上报时需要带设备名称, 通过蓝牙模块来获取设备名称 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- 可选的权限：异常上报系统log,XG也需要 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <!-- qxiaomi permission start -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- qxiaomi permission end -->
+
+    <!-- 接入信鸽需要的其他权限 -->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" /> 
+    <!-- TODO SDK接入 必须权限模块 END -->
+    
+</manifest>
